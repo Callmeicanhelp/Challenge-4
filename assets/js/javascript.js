@@ -30,25 +30,84 @@ var questionBank = [
             "//",
         ] , 
         correctAnswer: "()"
+    },
+    {
+        question: "The condition of an if else statement is enclosed with",
+        answers: [
+            "()",
+            "{}",
+            "[]",
+            "//",
+        ] , 
+        correctAnswer: "()"
+    },
+    {
+        question: "The condition of an if else statement is enclosed with",
+        answers: [
+            "()",
+            "{}",
+            "[]",
+            "//",
+        ] , 
+        correctAnswer: "()"
+    },
+    {
+        question: "The condition of an if else statement is enclosed with",
+        answers: [
+            "()",
+            "{}",
+            "[]",
+            "//",
+        ] , 
+        correctAnswer: "()"
     }
 ]
 
 
 //runs on click event listener, remove start button, append question with answer buttons, start timer
+var cdtime;
+var seconds = 75; 
+
+function countdown(element) {
+    cdtime = setInterval(function() {
+        var timer = document.getElementById(element);
+        if(seconds == 0) {{
+            alert(timer.innerHTML = "END OF QUIZ!");                    
+            clearInterval(cdtime);
+            return;
+            } 
+        }
+        var secondstxt;
+            if(seconds > 1)
+            {
+            secondstxt = 'seconds'; 
+            }
+            else
+            { 
+            secondstxt = 'second';
+            }
+
+
+        timer.innerHTML =seconds + ' ' + secondstxt;
+        seconds--;
+    }, 1000); 
+}
+
 var startQuiz = function(){
     startButton.remove();
 
-    renderQuestion()
+    renderQuestion();
+
+    countdown();
 
 }
 
 var renderQuestion = function() {
     var questionDiv = document.createElement("div")
 
-
     questionDiv.innerHTML = questionBank[0].question
 
-    quizSection.appenChild(questionDiv)
+    quizSection.appendChild(questionDiv)
 
     renderChoices()
 }
