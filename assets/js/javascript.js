@@ -3,18 +3,11 @@ var quizSection = document.getElementById("quiz-section")
 var questionDiv = document.createElement("div")
 var answerDiv = document.createElement("div")
 var questionIndex = 0
-
-//timer running
-
-//start button click and displays first question
-
-//generate question text and four answer buttons
-
 var questionBank = [
     {
-        question: "Commonly used data types do not include",
+        question: "Commonly used data types do not include __________.",
         answers: [
-            "boolean",
+            "booleans",
             "numbers & strings",
             "arrays",
             "loop",
@@ -22,7 +15,7 @@ var questionBank = [
         correctAnswer: "loops"
     },
     {
-        question: "The condition of an if else statement is enclosed with",
+        question: "The condition of an if else statement is enclosed with_________.",
         answers: [
             "()",
             "{}",
@@ -32,34 +25,34 @@ var questionBank = [
         correctAnswer: "()"
     },
     {
-        question: "The condition of an if else statement is enclosed with",
+        question: "Arrays in javascript can be used to store __________.",
         answers: [
-            "()",
-            "{}",
-            "[]",
-            "//",
+            "booleans",
+            "numbers & strings",
+            "other arrays",
+            "all of the above",
         ] , 
-        correctAnswer: "()"
+        correctAnswer: "all of the above"
     },
     {
-        question: "The condition of an if else statement is enclosed with",
+        question: "String values must be enclosed within _______ when being assigned to variables",
         answers: [
-            "()",
+            ",,",
             "{}",
             "[]",
-            "//",
+            "()",
         ] , 
-        correctAnswer: "()"
+        correctAnswer: "{}"
     },
     {
-        question: "The condition of an if else statement is enclosed with",
+        question: "A very useful tool used during development and debugging for printing content to the debugger is:",
         answers: [
-            "()",
-            "{}",
-            "[]",
-            "//",
+            "JavaScript",
+            "terminal/bash",
+            "for loops",
+            "console.log",
         ] , 
-        correctAnswer: "()"
+        correctAnswer: "console.log"
     }
 ]
 
@@ -71,11 +64,10 @@ var seconds = 75;
 function countdown(element) {
     cdtime = setInterval(function() {
         var timer = document.getElementById(element);
-        if(seconds == 0) {{
+        if(seconds == 0) {
             alert(timer.innerHTML = "END OF QUIZ!");                    
             clearInterval(cdtime);
             return;
-            } 
         }
         var secondstxt;
             if(seconds > 1)
@@ -93,18 +85,9 @@ function countdown(element) {
     }, 1000); 
 }
 
-var startQuiz = function(){
-    startButton.remove();
 
-    renderQuestion();
-
-    countdown();
-
-}
 
 var renderQuestion = function() {
-    var questionDiv = document.createElement("div")
-
     questionDiv.innerHTML = questionBank[0].question
 
     quizSection.appendChild(questionDiv)
@@ -142,6 +125,7 @@ var checkAnswer = function(event) {
         renderQuestion()
     }    
 
+    
 if (questionIndex === questionBank.length-1){
     //end game sequence
     console.log("end")
@@ -160,7 +144,14 @@ if (questionIndex === questionBank.length-1){
 
 
 }
+var startQuiz = function(quizSection){
+    startButton.remove();
 
+    renderQuestion();
+
+    countdown();
+
+}
 
 //correct answer button click shows next question and displays positive message
 //incorrect answer button click shows next question and displays negative message
