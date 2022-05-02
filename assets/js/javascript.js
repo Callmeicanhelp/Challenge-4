@@ -6,6 +6,7 @@ var questionIndex = 0
 var TimeDisplay = document.querySelector(".TimeDisplay")
 var TimeLeft = 75
 
+// question bank
 var questionBank = [
     {
         question: "Commonly used data types do not include __________.",
@@ -59,12 +60,13 @@ var questionBank = [
     }
 ]
 
-//runs on click event listener, remove start button, append question with answer buttons, start timer
+//timer function
 function DisplayTimeLeft (){
     var timer = setInterval(() => {
         TimeDisplay.textContent = "Time remaining:" + TimeLeft--
 
         if (TimeLeft < 0){
+            window.prompt("Quiz complete. Your score is 0" , "Please enter your initials")
             clearInterval(timer)
             setTimeout(() => {
             }, 1000);
@@ -77,6 +79,7 @@ function DisplayTimeLeft (){
 
 }
 
+// quiz functions
 var renderQuestion = function() {
     questionDiv.innerHTML = questionBank[questionIndex].question
 
@@ -118,8 +121,9 @@ var checkAnswer = function(event) {
 
     if (questionIndex === questionBank.length-1){
         //end quiz sequence
+
         window.prompt("Quiz complete. Your score is " + TimeLeft, "Please enter your initials")
-        localStorage.setItem(window.prompt,)
+        localStorage.setItem(window.prompt,+ TimeLeft, )
         location.reload();
         }
         else if (event.target.dataset.answer === questionBank[questionIndex].correctAnswer){
@@ -130,6 +134,8 @@ var checkAnswer = function(event) {
             TimeLeft = TimeLeft -10      
     }
 }
+
+// start quiz function
 var startQuiz = function(){
     startButton.remove();
     DisplayTimeLeft();
@@ -138,4 +144,3 @@ var startQuiz = function(){
 
 startButton.addEventListener("click", startQuiz)
 answerDiv.addEventListener("click", checkAnswer)
-window.prompt
