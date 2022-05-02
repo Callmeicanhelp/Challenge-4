@@ -3,6 +3,9 @@ var quizSection = document.getElementById("quiz-section")
 var questionDiv = document.createElement("div")
 var answerDiv = document.createElement("div")
 var questionIndex = 0
+var TimeDisplay = document.querySelector(".TimeDisplay")
+var TimeLeft = 75
+
 var questionBank = [
     {
         question: "Commonly used data types do not include __________.",
@@ -10,7 +13,7 @@ var questionBank = [
             "booleans",
             "numbers & strings",
             "arrays",
-            "loop",
+            "loops",
         ] , 
         correctAnswer: "loops"
     },
@@ -56,48 +59,36 @@ var questionBank = [
     }
 ]
 
-
 //runs on click event listener, remove start button, append question with answer buttons, start timer
-var cdtime;
-var seconds = 75; 
+function DisplayTimeLeft (){
+    var timer = setInterval(() => {
+        TimeDisplay.textContent = "Time remaining:" + TimeLeft--
 
-function countdown(element) {
-    cdtime = setInterval(function() {
-        var timer = document.getElementById(element);
-        if(seconds == 0) {
-            alert(timer.innerHTML = "END OF QUIZ!");                    
-            clearInterval(cdtime);
-            return;
+        if (TimeLeft < 0){
+            clearInterval(timer)
+            setTimeout(() => {
+            }, 1000);
         }
-        var secondstxt;
-            if(seconds > 1)
-            {
-            secondstxt = 'seconds'; 
-            }
-            else
-            { 
-            secondstxt = 'second';
-            }
+        if (questionIndex === questionBank.length-1){
+            return;
+        }    
+    },1000);
+    return;
 
-
-        timer.innerHTML =seconds + ' ' + secondstxt;
-        seconds--;
-    }, 1000); 
 }
-
-
 
 var renderQuestion = function() {
-    questionDiv.innerHTML = questionBank[0].question
-
-    quizSection.appendChild(questionDiv)
+    questionDiv.innerHTML = questionBank[questionIndex].question
 
     renderChoices()
+    quizSection.appendChild(questionDiv)
+
 }
+
 
 var renderChoices = function() {
 
-    for (let i = 0; i <questionBank[0].answers.length; i++) {
+    for (let i = 0; i <questionBank[questionIndex].answers.length; i++) {
         var answerButton = document.createElement("button")
 
         answerButton.setAttribute("class", "answer-button")
@@ -125,38 +116,26 @@ var checkAnswer = function(event) {
         renderQuestion()
     }    
 
-    
-if (questionIndex === questionBank.length-1){
-    //end game sequence
-    console.log("end")
+    if (questionIndex === questionBank.length-1){
+        //end quiz sequence
+        window.prompt("Quiz complete. Your score is " + TimeLeft, "Please enter your initials")
+        localStorage.setItem(window.prompt,)
+        location.reload();
+        }
+        else if (event.target.dataset.answer === questionBank[questionIndex].correctAnswer){
+            nextQuestionHelper()
+        }
+        else if (event.target.dataset.answer != questionBank[questionIndex].correctAnswer){        
+            nextQuestionHelper()
+            TimeLeft = TimeLeft -10      
     }
-
-    else if (event.target.dataset.answer === questionBank[questionIndex].correctAnswer){
-        nextQuestionHelper()
-    }
-   //pull the next question with answers display positive message
-
-   else if (event.target.dataset.answer != questionBank[questionIndex].correctAnswer){
-    //display negative message subtract from timer move to next question
-    nextQuestionHelper()
-    }
-
-
-
 }
-var startQuiz = function(quizSection){
+var startQuiz = function(){
     startButton.remove();
-
+    DisplayTimeLeft();
     renderQuestion();
-
-    countdown();
-
 }
-
-//correct answer button click shows next question and displays positive message
-//incorrect answer button click shows next question and displays negative message
-
-
 
 startButton.addEventListener("click", startQuiz)
 answerDiv.addEventListener("click", checkAnswer)
+window.prompt

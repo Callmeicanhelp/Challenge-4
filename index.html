@@ -4,19 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link re="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/styles.css">
     <title>Coding Quiz</title>
 </head>
 <body>
-    <header>
-        <div>
+    <header class="header">
+        <div class="highscores">
             <a href="./highscores.html">VIEW HIGHSCORES</a>
         </div>
-<!-- Display the countdown timer in an element -->
-    <div id="initialtime"></div>
-    <input type="button" id="start-button" onclick="countdown('countdown');" value="Start Quiz" />
-    <div id='countdown'></div> 
+        <!-- Display the countdown timer in an element -->
+        <div class="TimeDisplay"></div>
+
     </header>
+
+    <button id="start-button">Start Quiz</button>
+    <div id="quiz-section">Quiz Section</div>
 
     <script src="./assets/js/javascript.js"></script>
 </body>
